@@ -1,0 +1,223 @@
+import React from 'react';
+import logo from './logo.svg';
+import './App.css';
+import 'process';
+import Sound from 'react-sound';
+import PlayerControls from './PlayerControls';
+import ReactDOM from 'react-dom';
+
+
+class Start extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {isToggleOn: true};
+
+		// This binding is necessary to make `this` work in the callback
+		this.handleClick = this.handleClick.bind(this);
+	}
+
+	handleClick() {
+		this.setState(state => ({
+			isToggleOn: !state.isToggleOn
+		}));
+
+		const element = (
+			<div>
+				<h1>First Sound!</h1>
+				<h2>It is {new Date().toLocaleTimeString()}.</h2>
+				<MySound />
+			</div>
+		);
+		ReactDOM.render(element, document.getElementById('root'));
+  	}
+
+	render() {
+		return (
+	    		<div>
+	      			<h1>Get Started With The Quiz!</h1>
+	      			<h2>It is {new Date().toLocaleTimeString()}.</h2>
+	      			<button onClick={this.handleClick}>
+					{this.state.isToggleOn ? 'ON' : 'OFF'}
+	      			</button>
+			</div>
+	    	);
+	  }
+}
+
+class MySound extends React.Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			controlled1: true,
+			currentSong1: 0,
+			position1: 0,
+			volume1: 100,
+			playbackRate1: 1,
+			loop1: false,
+			playStatus1: Sound.status.STOPPED,
+			controlled2: true,
+			currentSong2: 0,
+			position2: 0,
+			volume2: 100,
+			playbackRate2: 1,
+			loop2: false,
+			playStatus2: Sound.status.STOPPED
+		};
+	}
+
+	getStatusText1() {
+		switch (this.state.playStatus1) {
+			case Sound.status.PLAYING:
+				return 'playing';
+			case Sound.status.PAUSED:
+				return 'paused';
+			case Sound.status.STOPPED:
+				return 'stopped';
+			default:
+				return '(unknown)';
+    		}
+  	}
+
+	getStatusText2() {
+		switch (this.state.playStatus2) {
+			case Sound.status.PLAYING:
+				return 'playing';
+			case Sound.status.PAUSED:
+				return 'paused';
+			case Sound.status.STOPPED:
+				return 'stopped';
+			default:
+				return '(unknown)';
+    		}
+  	}
+
+	handleSongSelected1 = (song) => {
+		this.setState({ currentSong1: song, position1: 0 });
+	}
+
+	handleSongSelected2 = (song) => {
+		this.setState({ currentSong2: song, position2: 0 });
+	}
+
+	handleControlledComponentChange1 = (ev) => {
+			this.setState({
+			controlled: ev.target.checked,
+			position1: 0
+		});
+  	}
+	
+	handleControlledComponentChange2 = (ev) => {
+			this.setState({
+			controlled: ev.target.checked,
+			position2: 0
+		});
+  	}
+
+	renderCurrentSong1() {
+		return (
+	      		<p>
+				Current song {this.state.currentSong1.title}. Song is {this.getStatusText1()}
+	      		</p>
+    		);
+  	}
+	renderCurrentSong2() {
+		return (
+	      		<p>
+				Current song {this.state.currentSong2.title}. Song is {this.getStatusText2()}
+	      		</p>
+    		);
+  	}
+
+	render() {
+		const { volume1, playbackRate1, loop1, volume2, playbackRate2, loop2 } = this.state;
+
+		return (
+			<div>
+				<PlayerControls	
+				  playStatus={this.state.playStatus1}
+				  loop={loop1}
+				  onPlay={() => this.setState({ playStatus1: Sound.status.PLAYING })}
+				  onPause={() => this.setState({ playStatus1: Sound.status.PAUSED })}
+				  onResume={() => this.setState({ playStatus1: Sound.status.PLAYING })}
+				  onStop={() => this.setState({ playStatus1: Sound.status.STOPPED, position1: 0 })}
+				  onSeek={position => this.setState({ position })}
+				  onVolumeUp={() => this.setState({ volume1: volume1 >= 100 ? volume1 : volume1 + 10 })}
+				  onVolumeDown={() => this.setState({ volume1: volume1 <= 0 ? volume1 : volume1 - 10 })}
+				  onPlaybackRateUp={() => this.setState({ playbackRate1: playbackRate1 >= 4 ? playbackRate1 : playbackRate1 + 0.5 })}
+				  onPlaybackRateDown={() => this.setState({ playbackRate1: playbackRate1 <= 0.5 ? playbackRate1 : playbackRate1 - 0.5 })}
+				  onToggleLoop={e => this.setState({ loop1: e.target.checked })}
+				  duration={this.state.currentSong1 ? this.state.currentSong.duration1 : 0}
+				  position={this.state.position1}
+				  playbackRate={playbackRate1}
+				/>
+				<Sound
+				      url={process.env.PUBLIC_URL + './LA_E_3549153.flac'}
+				      playStatus={this.state.playStatus1}
+				      position={this.state.position1}
+				      volume={volume1}
+				      playbackRate={playbackRate1}
+				      loop={loop1}
+				      onLoading={({ bytesLoaded, bytesTotal }) => console.log(`${bytesLoaded / bytesTotal * 100}% loaded`)}
+				      onLoad={() => console.log('Loaded')}
+				      onPlaying={({ position }) => this.setState({ position })}
+				      onPause={() => console.log('Paused')}
+				      onResume={() => console.log('Resumed')}
+				      onStop={() => console.log('Stopped')}
+				      onFinishedPlaying={() => this.setState({ playStatus1: Sound.status.STOPPED })}
+				/>
+				<PlayerControls	
+				  playStatus={this.state.playStatus2}
+				  loop={loop2}
+				  onPlay={() => this.setState({ playStatus2: Sound.status.PLAYING })}
+				  onPause={() => this.setState({ playStatus2: Sound.status.PAUSED })}
+				  onResume={() => this.setState({ playStatus2: Sound.status.PLAYING })}
+				  onStop={() => this.setState({ playStatus2: Sound.status.STOPPED, position2: 0 })}
+				  onSeek={position => this.setState({ position })}
+				  onVolumeUp={() => this.setState({ volume2: volume2 >= 100 ? volume2 : volume2 + 10 })}
+				  onVolumeDown={() => this.setState({ volume2: volume2 <= 0 ? volume2 : volume2 - 10 })}
+				  onPlaybackRateUp={() => this.setState({ playbackRate2: playbackRate2 >= 4 ? playbackRate2 : playbackRate2 + 0.5 })}
+				  onPlaybackRateDown={() => this.setState({ playbackRate2: playbackRate2 <= 0.5 ? playbackRate2 : playbackRate2 - 0.5 })}
+				  onToggleLoop={e => this.setState({ loop2: e.target.checked })}
+				  duration={this.state.currentSong2 ? this.state.currentSong2.duration : 0}
+				  position={this.state.position2}
+				  playbackRate={playbackRate2}
+				/>
+				<Sound
+				      url={process.env.PUBLIC_URL + './LA_E_3549153.flac'}
+				      playStatus={this.state.playStatus2}
+				      position={this.state.position2}
+				      volume={volume2}
+				      playbackRate={playbackRate2}
+				      loop={loop2}
+				      onLoading={({ bytesLoaded, bytesTotal }) => console.log(`${bytesLoaded / bytesTotal * 100}% loaded`)}
+				      onLoad={() => console.log('Loaded')}
+				      onPlaying={({ position }) => this.setState({ position })}
+				      onPause={() => console.log('Paused')}
+				      onResume={() => console.log('Resumed')}
+				      onStop={() => console.log('Stopped')}
+				      onFinishedPlaying={() => this.setState({ playStatus2: Sound.status.STOPPED })}
+				/>
+			</div>
+    		)
+  	}
+}
+
+function App() {
+
+	return (
+    		<div className="App">
+	      		<header className="App-header">
+				<img src={logo} className="App-logo" alt="logo" />
+				<p>
+				  	Edit <code>src/App.js</code> and save to reload.
+				</p>
+				<div>
+					<Start />
+				</div>
+	      		</header>
+    		</div>
+  	);
+}
+
+export default App;
