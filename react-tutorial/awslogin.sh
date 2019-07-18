@@ -1,3 +1,3 @@
 #!/bin/bash
 
-ssh -i ../deepfakequiz.pem ubuntu@3.13.241.88
+ssh -i ../../DS_10283_3336/deepfakequiz.pem ubuntu@3.13.241.88
