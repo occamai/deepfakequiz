@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './CompareClips.css';
 import 'process';
 import Sound from 'react-sound';
 import PlayerControls from './PlayerControls';
@@ -14,8 +14,8 @@ class CompareClips extends React.Component {
 
 		this.state = {
 
-			trial:1,
-			max:1,
+			trial:0,
+			max:10,
 
 			startDisabled: false,
 
@@ -40,7 +40,11 @@ class CompareClips extends React.Component {
 		
 			checked: null,
 			firstRadioDisabled: true,
-			secondRadioDisabled: true
+			secondRadioDisabled: true,
+
+			script: null,
+			play1: null,
+			play2: null
 		};
 	                
 		// This binding is necessary to make `this` work in the callback
@@ -54,9 +58,28 @@ class CompareClips extends React.Component {
 		this.handleFirstChange = this.handleFirstChange.bind(this);
 		this.handleSecondChange = this.handleSecondChange.bind(this);
 	}
+
+        componentDidMount() {
+                this.setState({ isLoading: true });
+
+                fetch("exp_Thu_Jul_18_18_21_50_2019/exp/SCRIPT.json")
+                        .then( response => {
+                                if (response.ok) {
+                                        console.log("YES!", response);
+                                        return response.json();
+                                } else {
+                                        throw new Error('Something went wrong ...');
+                                }
+                                })
+                //      .then(response => response.json())
+                        .then(data => this.setState({ script: data }));
+        }
 	
 	startClicked() {
+		console.log( "script", this.state.script );
 		this.setState( {startDisabled:true} )
+		this.setState( {position1:0, play1: this.state.script["2"][this.state.trial][0] } )
+		this.setState( {position2:0, play2: this.state.script["2"][this.state.trial][1] } )
 		this.props.setTimeout(this.playFirst,1000);
 	}
 
@@ -85,13 +108,29 @@ class CompareClips extends React.Component {
 			alert('Please make a choice!');
 			return;
 		} else {
-			if ( this.state.trial >= this.state.max ) {
+			if ( this.state.trial >= (this.state.max-1) ) {
+
+				/*
+				axios.post('http://127.0.0.1:3001/df?id=3000', {
+					id: 4000,
+					firstName: 'Fred',
+					lastName: 'Flintstone'
+					})
+				.then(function (response) {
+					console.log(response);
+				  })
+				.catch(function (error) {
+					console.log(error);
+				});
+				*/
+
 				const element = (
 					<div>
 						<Done />
 					</div>
 				);
 				ReactDOM.render(element, document.getElementById('root'));
+
 			} else {
 				this.state.trial = this.state.trial + 1;
 				this.setState( { nextDisabled: true, doneDisabled: true, startDisabled: false, checked:null, firstRadioDisabled:true, secondRadioDisabled:true } )
@@ -127,14 +166,14 @@ class CompareClips extends React.Component {
 		const { volume1, playbackRate1, loop1, volume2, playbackRate2, loop2  } = this.state;
 
 		return (
-			<div>
-				<h1>Deep Fake Quiz: {this.state.trial} of {this.state.max} </h1>
+			<div className="CompareClips">
+				<h1>Deep Fake Quiz: {this.state.trial+1} of {this.state.max} </h1>
 				<br />
-				<h2>In this exercise, you will hear two audio clips of human speech.  One of them is fake, but the other is real.  Can you tell which one is fake?  </h2>
+				<h2>In this exercise, you will hear two short clips from different people.  One of them is real, this other is a deep fake.  Can you tell which one is fake?  </h2>
 				<br />
-				<h2>When you are ready, click START to hear them. You will only hear them once!</h2>
+				<h2>When you are ready, click START to hear them. The clips will be played only once!</h2>
 				<br />
-				<button onClick={this.startClicked} disabled={this.state.startDisabled} >START</button>
+				<button style={{fontSize:"30px"}} className="abutton" onClick={this.startClicked} disabled={this.state.startDisabled} >START</button>
 				<div style={{display:"none"}} >
 					<PlayerControls	
 					  playStatus={this.state.playStatus1}
@@ -154,9 +193,10 @@ class CompareClips extends React.Component {
 					  playbackRate={playbackRate1}
 					/>
 					<Sound
-					      url={process.env.PUBLIC_URL + './LA_E_3549153.flac'}
+					      url={process.env.PUBLIC_URL + './' + this.state.play1}
 					      playStatus={this.state.playStatus1}
 					      position={this.state.position1}
+					      playFromPosition={this.state.position1}
 					      volume={volume1}
 					      playbackRate={playbackRate1}
 					      loop={loop1}
@@ -186,9 +226,10 @@ class CompareClips extends React.Component {
 					  playbackRate={playbackRate2}
 					/>
 					<Sound
-					      url={process.env.PUBLIC_URL + './LA_E_3549153.flac'}
+					      url={process.env.PUBLIC_URL + './' + this.state.play2}
 					      playStatus={this.state.playStatus2}
 					      position={this.state.position2}
+					      playFromPosition={this.state.position2}
 					      volume={volume2}
 					      playbackRate={playbackRate2}
 					      loop={loop2}
@@ -204,20 +245,19 @@ class CompareClips extends React.Component {
 				<br />
 				<h2>Now, which clip do you think is the fake one?</h2>
 				<form>
-					<label>
+					<label style={{fontSize:"20px"}} >
 						<input type="radio" value="1" name="fakeit" disabled={this.state.firstRadioDisabled} checked={this.state.checked=="1"} onChange={this.handleFirstChange} />      
 						First Clip Is Fake
 					</label>
 					<br />
-					<label>
+					<label style={{fontSize:"20px"}} >
 						<input type="radio" value="2" name="fakeit" disabled={this.state.secondRadioDisabled} checked={this.state.checked=="2"} onChange={this.handleSecondChange} />
 						Second Clip Is Fake
 					</label>
 				</form>
 
 				<br />
-				<button onClick={ function(obj) {return obj.nextClicked; }(this)  } disabled={this.state.nextDisabled} >NEXT</button>
-				<button onClick={ function(obj) {return obj.doneClicked; }(this)  } disabled={this.state.doneDisabled} >DONE</button>
+				<button style={{fontSize:"30px"}} className="abutton" onClick={ function(obj) {return obj.nextClicked; }(this)  } disabled={this.state.nextDisabled} >NEXT</button>
 			</div>
     		)
   	}

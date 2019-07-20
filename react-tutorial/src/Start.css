@@ -1,0 +1,42 @@
+.Start {
+  margin: auto;
+  width: 70%;
+  border: 3px solid green;
+  padding: 10px;
+}
+.input_label {
+	display: block;
+	width: 100px;
+	font-size: 30px;
+}
+.input_width {
+	width: 400px;
+	font-size: 30px;
+}
+.center_button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.center_button:disabled {
+  background-color: #CCCCCC;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+input[type=button], input[type=submit], input[type=reset] {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}

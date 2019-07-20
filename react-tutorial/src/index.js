@@ -6,6 +6,7 @@ import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
 import Start from './Start';
 import CompareClips from './CompareClips';
 import { GoogleLogin } from 'react-google-login';
+import process from 'process';
 
 const responseGoogle = (response) => {
   console.log(response);
@@ -24,29 +25,21 @@ const routing = (
 ReactDOM.render(routing, document.getElementById('root'))
 */
 
-/*
-ReactDOM.render(<Start />, document.getElementById('root'));
-*/
+if (!process.env.AUTH) {
 
+	ReactDOM.render(<Start />, document.getElementById('root'));
 
-/*
-ReactDOM.render(<App />, document.getElementById('root'));
+} else {
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
-*/
+	ReactDOM.render(
+	  <GoogleLogin
+	    clientId="199718064485-gm6lbrk6n4fmn991oe2osqihpu3rrbnc.apps.googleusercontent.com"
+	    buttonText="Login"
+	    onSuccess={responseGoogle}
+	    onFailure={responseGoogle}
+	    cookiePolicy={'single_host_origin'}
+	  />,
+	  document.getElementById('root')
+	);
 
-
-ReactDOM.render(
-  <GoogleLogin
-    clientId="199718064485-gm6lbrk6n4fmn991oe2osqihpu3rrbnc.apps.googleusercontent.com"
-    buttonText="Login"
-    onSuccess={responseGoogle}
-    onFailure={responseGoogle}
-    cookiePolicy={'single_host_origin'}
-  />,
-  document.getElementById('root')
-);
-
+}

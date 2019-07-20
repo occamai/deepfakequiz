@@ -9,7 +9,7 @@ export default class Done extends React.Component {
 
 	render() {
 		return (
-	    		<div>
+	    		<div className="Done" >
 	      			<h1>Thanks for participating in the Deep Fake Quiz!</h1>
 				<br />
 	      			<h1>We will email your scores to you after the tournament ends.</h1>
