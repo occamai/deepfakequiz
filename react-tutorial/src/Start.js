@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import './Start.css';
-import CompareClips from './CompareClips';
+import OneClip from './OneClip';
 import Sound from 'react-sound';
 import PlayerControls from './PlayerControls';
 const uuidv1 = require('uuid/v1');
@@ -38,7 +38,7 @@ export default class Start extends React.Component {
 		this.handleNameChange = this.handleNameChange.bind(this);
 		this.handleAgeChange = this.handleAgeChange.bind(this);
 		this.handleGenderChange = this.handleGenderChange.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
+		//this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleEndPlay = this.handleEndPlay.bind(this);
 	
 	}
@@ -81,7 +81,7 @@ export default class Start extends React.Component {
 
                 const element = (
                         <div>
-                                <CompareClips guid={this.state.guid} name={this.state.name} gender={this.state.gender} age={this.state.age} />
+                                <OneClip guid={this.state.guid} name={this.state.name} gender={this.state.gender} age={this.state.age} />
                         </div>
                 );
                 ReactDOM.render(element, document.getElementById('root'));
@@ -113,6 +113,9 @@ export default class Start extends React.Component {
 
 	handleSubmit(event) {
 
+		return;
+
+		/*
 		// Name
 		if (this.state.name=="") {
 			alert('Please Enter A Valid Name');
@@ -136,10 +139,12 @@ export default class Start extends React.Component {
 
 		const element = (
 			<div>
-				<CompareClips guid={this.state.guid} />
+				<OneClip guid={this.state.guid} />
 			</div>
 		);
 		ReactDOM.render(element, document.getElementById('root'));
+
+		*/
 
     		event.preventDefault();
 

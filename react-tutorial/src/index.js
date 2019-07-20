@@ -8,6 +8,7 @@ import CompareClips from './CompareClips';
 import Error from './Error';
 import { GoogleLogin } from 'react-google-login';
 import process from 'process';
+import global from './global';
 
 const responseGoogleSuccess = (response) => {
   	console.log("login success=",response);
@@ -16,27 +17,16 @@ const responseGoogleSuccess = (response) => {
 
 const responseGoogleFail = (response) => {
   	console.log("login faile=",response);
-	ReactDOM.render(<Error />, document.getElementById('root'));
+	ReactDOM.render(<Error error="Google Authentication Failed." />, document.getElementById('root'));
 }
 
-/*
-const routing = (
-  <Router>
-    <Start />
-    <div>
-      <Route exact path="/start" component={Start} />
-      <Route exact path="/compare" component={CompareClips} />
-    </div>
-  </Router>
-)
-ReactDOM.render(routing, document.getElementById('root'))
-*/
+//console.log("PROCESS AUTH=", process.env.REACT_APP_AUTH, process.env.PORT);
 
-console.log("PROCESS AUTH=", process.env.REACT_APP_AUTH, process.env.PORT);
+if (!global.googleauth) {
 
-if (false) {
-
-	ReactDOM.render(<Start guid="999" />, document.getElementById('root'));
+	ReactDOM.render(
+		<Start guid="999" />,
+		document.getElementById('root'));
 
 } else {
 
