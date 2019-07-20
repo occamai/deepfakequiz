@@ -28,7 +28,7 @@ var server = http.createServer ( function(request,response){
 		obj = JSON.parse(body);
 		console.log(obj);
 
-		fs.writeFileSync("./data/" + obj.id, body,{encoding:'utf8',flag:'w'})
+		fs.writeFileSync("./data/results_" + obj.id, body,{encoding:'utf8',flag:'w'})
 		console.log("wrote file");
 
 		response.setHeader('Access-Control-Allow-Origin', '*');

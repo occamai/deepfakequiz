@@ -12,10 +12,12 @@ export default class Start extends React.Component {
 	constructor(props) {
 		super(props);
 
-		var guid = uuidv1();
+		console.log("GUID=",props.guid);
+
+		//var guid = uuidv1();
 
 		this.state = {
-			guid: guid, 
+			guid: props.guid,
 			name:"", 
 			age:"", 
 			gender:"",
@@ -30,8 +32,6 @@ export default class Start extends React.Component {
 			//ready:"hidden",
 			startDisabled:true
 		};
-
-		console.log("GUID=",guid);
 
 		this.handleStartClick = this.handleStartClick.bind(this);
 		this.handleTestClick = this.handleTestClick.bind(this);
@@ -81,7 +81,7 @@ export default class Start extends React.Component {
 
                 const element = (
                         <div>
-                                <CompareClips guid={this.state.guid} />
+                                <CompareClips guid={this.state.guid} name={this.state.name} gender={this.state.gender} age={this.state.age} />
                         </div>
                 );
                 ReactDOM.render(element, document.getElementById('root'));

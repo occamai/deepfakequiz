@@ -12,12 +12,19 @@ class CompareClips extends React.Component {
 	constructor(props) {
 		super(props);
 
+		console.log("PARENT GUID=", props.guid);
+
 		this.state = {
+
+			guid: props.guid, 
+			name: props.name,
+			age: props.age,
+			gender: props.gender,
 
 			trial:0,
 			max:10,
 
-			startDisabled: false,
+			startDisabled: true,
 
 			controlled1: true,
 			currentSong1: 0,
@@ -44,7 +51,9 @@ class CompareClips extends React.Component {
 
 			script: null,
 			play1: null,
-			play2: null
+			play2: null,
+
+			results:[]
 		};
 	                
 		// This binding is necessary to make `this` work in the callback
@@ -72,7 +81,7 @@ class CompareClips extends React.Component {
                                 }
                                 })
                 //      .then(response => response.json())
-                        .then(data => this.setState({ script: data }));
+                        .then(data => this.setState({ script: data }, () => { this.setState({ startDisabled:false}) } ));
         }
 	
 	startClicked() {
@@ -108,33 +117,28 @@ class CompareClips extends React.Component {
 			alert('Please make a choice!');
 			return;
 		} else {
-			if ( this.state.trial >= (this.state.max-1) ) {
-
-				/*
-				axios.post('http://127.0.0.1:3001/df?id=3000', {
-					id: 4000,
-					firstName: 'Fred',
-					lastName: 'Flintstone'
-					})
-				.then(function (response) {
-					console.log(response);
-				  })
-				.catch(function (error) {
-					console.log(error);
+				
+			this.setState( { nextDisabled: true, 	
+						doneDisabled: true, 
+						startDisabled: false, 
+						checked:null, 
+						firstRadioDisabled:true, 
+						secondRadioDisabled:true,
+						trial: this.state.trial+1,
+						results: this.state.results.concat([ this.state.checked]) },
+						
+						()  => 
+				{ 
+					console.log("DONE SETSTATE", this.state.results)
+					if ( this.state.trial >= (this.state.max) ) {
+						const element = (
+							<div>
+								<Done guid={this.state.guid} name={this.state.name} gender={this.state.gender} age={this.state.age} results={this.state.results} />
+							</div>
+						);
+						ReactDOM.render(element, document.getElementById('root'));
+					}
 				});
-				*/
-
-				const element = (
-					<div>
-						<Done />
-					</div>
-				);
-				ReactDOM.render(element, document.getElementById('root'));
-
-			} else {
-				this.state.trial = this.state.trial + 1;
-				this.setState( { nextDisabled: true, doneDisabled: true, startDisabled: false, checked:null, firstRadioDisabled:true, secondRadioDisabled:true } )
-			}
 		}
 	}
 	

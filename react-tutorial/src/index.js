@@ -11,7 +11,7 @@ import process from 'process';
 
 const responseGoogleSuccess = (response) => {
   	console.log("login success=",response);
-	ReactDOM.render(<Start />, document.getElementById('root'));
+	ReactDOM.render(<Start guid={response.googleId} />, document.getElementById('root'));
 }
 
 const responseGoogleFail = (response) => {
@@ -36,7 +36,7 @@ console.log("PROCESS AUTH=", process.env.REACT_APP_AUTH, process.env.PORT);
 
 if (false) {
 
-	ReactDOM.render(<Start />, document.getElementById('root'));
+	ReactDOM.render(<Start guid="999" />, document.getElementById('root'));
 
 } else {
 
