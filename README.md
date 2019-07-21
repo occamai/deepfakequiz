@@ -2,7 +2,7 @@
 
 ## local development
 
-In general, I prototypes things very quickly.  This entire project could use some TLC...
+In general, I prototyped this project very quickly.  It could use some TLC...
 
 ### http post server
 
