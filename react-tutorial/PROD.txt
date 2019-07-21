@@ -1,4 +1,5 @@
 
 sudo PORT=443 nohup npm start
+sudo PORT=80 nohup npm start
 
 sudo nohup node dfsrv.js
