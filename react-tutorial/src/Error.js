@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import './Error.css';
 
 export default class Error extends React.Component {

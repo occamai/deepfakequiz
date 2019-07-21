@@ -5,15 +5,12 @@ import Sound from 'react-sound';
 import PlayerControls from './PlayerControls';
 import ReactDOM from 'react-dom';
 import ReactTimeout from 'react-timeout';
-import queryString from 'query-string'
 import Done from './Done'
 import global from './global'
 
 class CompareClips extends React.Component {
 	constructor(props) {
 		super(props);
-
-		console.log("PARENT GUID=", props.guid);
 
 		this.state = {
 
@@ -76,34 +73,18 @@ class CompareClips extends React.Component {
                 fetch( global.experiment + "/exp/SCRIPT.json")
                    .then( response => {
                                 if (response.ok) {
-                                        console.log("YES!", response);
+                                        //console.log("YES!", response);
                                         var js = response.json();
-                                        console.log(js);
                                         js.then( data => this.setState({ script: data, max: data["1"].length + data["2"].length }, () => { this.setState({ startDisabled:false }) } ) );
                                         return js;
                                 } else {
                                         throw new Error('Something went wrong ...');
                                 }
                    })
-
-		/*
-                fetch( global.experiment + "exp/SCRIPT.json")
-                        .then( response => {
-                                if (response.ok) {
-                                        console.log("YES!", response);
-					var js = response.json();
-					console.log(js);
-                                        return js;
-                                } else {
-                                        throw new Error('Something went wrong ...');
-                                }
-                                })
-                        .then(data => this.setState({ script: data, max: data["1"].length + data["2"].length }, () => { this.setState({ startDisabled:false}) } ));
-		*/
         }
 	
 	startClicked() {
-		console.log( "script", this.state.script );
+		//console.log( "script", this.state.script );
 		this.setState( {startDisabled:true} )
 		this.setState( {position1:0, play1: this.state.script["2"][this.state.trial][0] } )
 		this.setState( {position2:0, play2: this.state.script["2"][this.state.trial][1] } )
@@ -147,7 +128,7 @@ class CompareClips extends React.Component {
 						
 						()  => 
 				{ 
-					console.log("DONE SETSTATE", this.state.results)
+					//console.log("DONE SETSTATE", this.state.results)
 					if ( this.state.trial >= (this.state.script["2"].length) ) {
 						const element = (
 							<div>
@@ -161,12 +142,12 @@ class CompareClips extends React.Component {
 	}
 	
 	handleFirstChange(event) {
-                console.log( "first",event.target.value );
+                //console.log( "first",event.target.value );
 		this.setState( {checked: event.target.value} );
         }
 	
 	handleSecondChange(event) {
-                console.log( "second",event.target.value );
+                //console.log( "second",event.target.value );
 		this.setState( {checked: event.target.value} );
         }
 
@@ -254,12 +235,12 @@ class CompareClips extends React.Component {
 				<h2>Now, which clip do you think is the fake one?</h2>
 				<form>
 					<label style={{fontSize:"20px"}} >
-						<input type="radio" value="1" name="fakeit" disabled={this.state.firstRadioDisabled} checked={this.state.checked=="1"} onChange={this.handleFirstChange} />      
+						<input type="radio" value="1" name="fakeit" disabled={this.state.firstRadioDisabled} checked={this.state.checked==="1"} onChange={this.handleFirstChange} />      
 						First Clip Is Fake
 					</label>
 					<br />
 					<label style={{fontSize:"20px"}} >
-						<input type="radio" value="2" name="fakeit" disabled={this.state.secondRadioDisabled} checked={this.state.checked=="2"} onChange={this.handleSecondChange} />
+						<input type="radio" value="2" name="fakeit" disabled={this.state.secondRadioDisabled} checked={this.state.checked==="2"} onChange={this.handleSecondChange} />
 						Second Clip Is Fake
 					</label>
 				</form>

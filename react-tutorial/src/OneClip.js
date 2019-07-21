@@ -5,15 +5,12 @@ import Sound from 'react-sound';
 import PlayerControls from './PlayerControls';
 import ReactDOM from 'react-dom';
 import ReactTimeout from 'react-timeout';
-import queryString from 'query-string'
 import CompareClips from './CompareClips';
 import global from './global';
 
 class OneClip extends React.Component {
 	constructor(props) {
 		super(props);
-
-		console.log("PARENT GUID=", props.guid);
 
 		this.state = {
 
@@ -63,9 +60,8 @@ class OneClip extends React.Component {
                 fetch( global.experiment + "/exp/SCRIPT.json")
                    .then( response => {
                                 if (response.ok) {
-                                        console.log("YES!", response);
+                                        //console.log("YES!", response);
                                         var js = response.json();
-					console.log(js);
 					js.then( data => this.setState({ script: data, max: data["1"].length + data["2"].length }, () => { this.setState({ startDisabled:false }) } ) );
 					return js;
                                 } else {
@@ -76,7 +72,7 @@ class OneClip extends React.Component {
         }
 	
 	startClicked() {
-		console.log( "script", this.state.script );
+		//console.log( "script", this.state.script );
 		this.setState( {startDisabled:true} )
 		this.setState( {position1:0, play1: this.state.script["1"][this.state.trial] } )
 		this.props.setTimeout(this.playFirst,1000);
@@ -108,7 +104,7 @@ class OneClip extends React.Component {
 						
 						()  => 
 				{ 
-					console.log("DONE SETSTATE", this.state.results)
+					//console.log("DONE SETSTATE", this.state.results)
 					if ( this.state.trial >= (this.state.script["1"].length) ) {
 						const element = (
 							<div>
@@ -122,12 +118,12 @@ class OneClip extends React.Component {
 	}
 	
 	handleFirstChange(event) {
-                console.log( "first",event.target.value );
+                //console.log( "first",event.target.value );
 		this.setState( {checked: event.target.value} );
         }
 	
 	handleSecondChange(event) {
-                console.log( "second",event.target.value );
+                //console.log( "second",event.target.value );
 		this.setState( {checked: event.target.value} );
         }
 
@@ -182,12 +178,12 @@ class OneClip extends React.Component {
 				<h2>Now, what do you think?</h2>
 				<form>
 					<label style={{fontSize:"20px"}} >
-						<input type="radio" value="1" name="fakeit" disabled={this.state.firstRadioDisabled} checked={this.state.checked=="1"} onChange={this.handleFirstChange} />      
+						<input type="radio" value="1" name="fakeit" disabled={this.state.firstRadioDisabled} checked={this.state.checked==="1"} onChange={this.handleFirstChange} />      
 						The Clip Is A Deep Fake
 					</label>
 					<br />
 					<label style={{fontSize:"20px"}} >
-						<input type="radio" value="2" name="fakeit" disabled={this.state.secondRadioDisabled} checked={this.state.checked=="2"} onChange={this.handleSecondChange} />
+						<input type="radio" value="2" name="fakeit" disabled={this.state.secondRadioDisabled} checked={this.state.checked==="2"} onChange={this.handleSecondChange} />
 						A Real Person Was Speaking
 					</label>
 				</form>

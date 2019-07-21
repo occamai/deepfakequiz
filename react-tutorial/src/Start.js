@@ -1,20 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import axios from 'axios';
 import './Start.css';
 import OneClip from './OneClip';
 import Sound from 'react-sound';
 import PlayerControls from './PlayerControls';
-const uuidv1 = require('uuid/v1');
+//const uuidv1 = require('uuid/v1');
 
 export default class Start extends React.Component {
 
 	constructor(props) {
 		super(props);
-
-		console.log("GUID=",props.guid);
-
-		//var guid = uuidv1();
 
 		this.state = {
 			guid: props.guid,
@@ -29,7 +24,6 @@ export default class Start extends React.Component {
                         loop2: false,
                         playStatus2: Sound.status.STOPPED,
 
-			//ready:"hidden",
 			startDisabled:true
 		};
 
@@ -38,43 +32,25 @@ export default class Start extends React.Component {
 		this.handleNameChange = this.handleNameChange.bind(this);
 		this.handleAgeChange = this.handleAgeChange.bind(this);
 		this.handleGenderChange = this.handleGenderChange.bind(this);
-		//this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleEndPlay = this.handleEndPlay.bind(this);
 	
 	}
 
-	/*
-	componentDidMount() {
-
-		axios.post('http://127.0.0.1:3001/df?id=3000', {
-			id: 4000,
-			firstName: 'Fred',
-		    	lastName: 'Flintstone'
-		  	})
-		.then(function (response) {
-		 	console.log(response);
-		  })
-		.catch(function (error) {
-		    	console.log(error);
-		});
-  	}
-	*/
-
 	handleStartClick() {
                 // Name
-                if (this.state.name=="") {
+                if (this.state.name==="") {
                         alert('Please Enter A Valid Name');
                         return;
                 }
 
                 // Age
-                if (this.state.age=="") {
+                if (this.state.age==="") {
                         alert('Please Enter A Valid Age');
                         return;
                 }
 
                 // Gender
-                if (this.state.gender=="") {
+                if (this.state.gender==="") {
                         alert('Please Enter A Valid Gender');
                         return;
                 }
@@ -89,7 +65,7 @@ export default class Start extends React.Component {
   	}
 	
 	handleEndPlay() {
-		console.log("end play");
+		//console.log("end play");
                 this.setState( {position2:0, playStatus2: Sound.status.STOPPED, startDisabled:false} )
 	}
 
@@ -107,46 +83,15 @@ export default class Start extends React.Component {
 	
 	handleGenderChange(event) {
     		this.setState({gender: event.target.value}, () => {
-      			console.log("gender=", this.state.gender);
+      			//console.log("gender=", this.state.gender);
     		});
   	}
 
 	handleSubmit(event) {
 
-		return;
-
-		/*
-		// Name
-		if (this.state.name=="") {
-			alert('Please Enter A Valid Name');
-    			event.preventDefault();
-			return;
-		} 
-
-		// Age
-		if (this.state.age=="") {
-			alert('Please Enter A Valid Age');
-    			event.preventDefault();
-			return;
-		}
-		
-		// Gender
-		if (this.state.gender=="") {
-			alert('Please Enter A Valid Gender');
-    			event.preventDefault();
-			return;
-		}
-
-		const element = (
-			<div>
-				<OneClip guid={this.state.guid} />
-			</div>
-		);
-		ReactDOM.render(element, document.getElementById('root'));
-
-		*/
-
     		event.preventDefault();
+
+		return;
 
   	}
 
@@ -158,7 +103,6 @@ export default class Start extends React.Component {
 				<br />
 
 	      			<h1>First, please fill out the following information:</h1>
-				<h1></h1>
 				<br />	
 
 				<form onSubmit={this.handleSubmit}>

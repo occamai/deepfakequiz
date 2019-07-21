@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import './Done.css';
 import axios from 'axios';
 import global from './global';
@@ -8,8 +7,6 @@ export default class Done extends React.Component {
 
 	constructor(props) {
 		super(props);
-
-		console.log("DGUID=", props.guid);
 
 		this.state = {
 			guid: props.guid,
@@ -23,9 +20,8 @@ export default class Done extends React.Component {
 
         componentDidMount() {
                
-		console.log("SENDING RESULTS");
+		//console.log("SENDING RESULTS");
 
-		//axios.post('http://127.0.0.1:3001/df?id=3000', {
 		axios.post( global.posturl + '/df?id=3000', {
 			id: this.state.guid,
 			name: this.state.name,
@@ -36,10 +32,10 @@ export default class Done extends React.Component {
 			experiment: global.experiment
 		})
 		.then(function (response) {
-			console.log("DONE send",response);
+			console.log("RESULTS SENT",response);
 		})
 		.catch(function (error) {
-			console.log(error);
+			console.log("SEND ERROR", error);
 		});
 	}
 
