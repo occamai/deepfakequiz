@@ -1,5 +1,7 @@
 
-sudo PORT=443 nohup npm start
+sudo PORT=443 nohup npm start # CHANGE package.json file
 sudo PORT=80 nohup npm start
 
 sudo nohup node dfsrv.js
+
+sudo nohup node redir.js
