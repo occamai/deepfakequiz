@@ -1,7 +1,12 @@
-var http = require('http');
+var http = require('https');
 var fs = require('fs');
 
 var server = http.createServer (
+	{
+	  key: fs.readFileSync('/Users/george/Desktop/BLACKHAT/ssl/private-key.pem'),
+	  cert: fs.readFileSync('/Users/george/Desktop/BLACKHAT/ssl/252239439.crt'),
+	  ca: fs.readFileSync('/Users/george/Desktop/BLACKHAT/ssl/252239439.ca-bundle')
+	},
 
 	/*
 	{
