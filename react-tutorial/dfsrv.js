@@ -2,18 +2,20 @@ var http = require('https');
 var fs = require('fs');
 
 var server = http.createServer (
+
+	/*
 	{
 	  key: fs.readFileSync('/Users/george/Desktop/BLACKHAT/ssl/private-key.pem'),
 	  cert: fs.readFileSync('/Users/george/Desktop/BLACKHAT/ssl/252239439.crt'),
 	  ca: fs.readFileSync('/Users/george/Desktop/BLACKHAT/ssl/252239439.ca-bundle')
 	},
+	*/
 
-	/*
 	{
 	  key: fs.readFileSync('/home/ubuntu/ssl/private-key.pem'),
-	  cert: fs.readFileSync('/home/ubuntu/ssl/252239439.crt')
+	  cert: fs.readFileSync('/home/ubuntu/ssl/252239439.crt'),
+	  ca: fs.readFileSync('/home/ubuntu//ssl/252239439.ca-bundle')
 	},
-	*/
 
     	function(request,response){
 
@@ -22,7 +24,13 @@ var server = http.createServer (
 	    if(request.method == "GET")
 	    {
 			console.log("get");
-			response.writeHead(200,{"Content-Type":"text\plain"});
+                        response.setHeader('Access-Control-Allow-Origin', '*');
+                        response.setHeader('Access-Control-Request-Method', '*');
+                        response.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
+                        response.setHeader('Access-Control-Allow-Headers', request.headers.origin);
+                        response.setHeader('Access-Control-Allow-Headers', 'authorization, content-type');
+                        response.writeHead(200,{"Content-Type":"text\plain"});
+
 		    response.end("received GET request.")
 	    }
 	    else if(request.method == "POST")

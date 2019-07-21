@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
+import global from './global';
 import './Start.css';
 import OneClip from './OneClip';
 import Sound from 'react-sound';
@@ -33,8 +35,19 @@ export default class Start extends React.Component {
 		this.handleAgeChange = this.handleAgeChange.bind(this);
 		this.handleGenderChange = this.handleGenderChange.bind(this);
 		this.handleEndPlay = this.handleEndPlay.bind(this);
-	
 	}
+
+	componentDidMount() {
+
+		// This is a dummy get to validate the connection to the post server
+                axios.get( global.posturl + '/' )
+                .then(function (response) {
+                        console.log("SERVER OK",response);
+                })
+                .catch(function (error) {
+                        console.log("SERVER FAIL", error);
+                });
+        }
 
 	handleStartClick() {
                 // Name
