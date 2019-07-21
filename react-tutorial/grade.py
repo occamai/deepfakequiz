@@ -96,7 +96,7 @@ print("SCRIPT2=", script["2"])
 f.close()
 
 # Grade each entry...
-grade_dir = "remote_data"
+grade_dir = "data"
 tests = os.listdir( grade_dir )
 
 grades = []

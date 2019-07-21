@@ -18,18 +18,23 @@ const responseGoogleFail = (response) => {
 	ReactDOM.render(<Error error="Google Authentication Failed." />, document.getElementById('root'));
 }
 
-//console.log("PROCESS AUTH=", process.env.REACT_APP_AUTH, process.env.PORT);
+// Choose which experiment
+if (window.location.href.indexOf("wave")>0) {
+	console.log("CHOOSING AVS+WAVENET EXP");
+	global.experiment = global.avs_wavenet;
+} else {
+	console.log("CHOOSING AVS EXP");
+	global.experiment = global.avsspoof;
+}
 
 // Chrome 1 - 71
-//const isChrome = !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);
-//console.log("ISCHROME", isChrome , window.chrome );
-//if (!isChrome) {
-//
-//ReactDOM.render(<Error error="Only the Google Chrome browser is supported." />, document.getElementById('root'));
-//
-//} else 
-	
-if (!global.googleauth) {
+const isChrome = !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);
+console.log("ISCHROME", isChrome , window.chrome );
+if (!isChrome) {
+
+	ReactDOM.render(<Error error="Only the Google Chrome browser is supported." />, document.getElementById('root'));
+
+} else if (!global.googleauth) {
 
 	ReactDOM.render(
 		<Start guid="999" />,
@@ -50,5 +55,4 @@ if (!global.googleauth) {
 		</div>,
 	  document.getElementById('root')
 	);
-
 }

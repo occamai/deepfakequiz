@@ -32,3 +32,6 @@ remote_data/
 nohup.out
 *.pem
 
+experiments
+experiments/
+
