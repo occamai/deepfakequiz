@@ -131,7 +131,7 @@ export default class Start extends React.Component {
 					<br />	
 				</form>
 
-				<h2>Click the TEST button to check your audio.  You should hear a short clip of speech. If you don't hear it, check your settings and try again. Use a Chrome browser for best results.</h2>
+				<h2>Click the TEST button to check your audio.  You should hear a short clip of speech. If you don't hear it, check your settings and try again. Use a Google Chrome browser (not on a mobile device) for the best results.</h2>
 				<font size="30" >			
 					<button style={{fontSize:"30px"}} className="center_button" onClick={this.handleTestClick} >Test</button>
 				</font>
