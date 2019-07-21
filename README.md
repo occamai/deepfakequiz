@@ -6,7 +6,7 @@ In general, I prototyped this project very quickly.  It could use some TLC...
 
 ### http post server
 
-This is the lightweight server that receives the quiz results at the end of the app.  It writes the results to the file system.
+This is the lightweight server that receives the quiz results at the end of the quiz.  The server writes the JSON results to the file system.
 
 Installation as follows:
 * Ubuntu 18.04 ( likely other versions work, but that's what I used )
@@ -21,12 +21,11 @@ Installation as follows:
 This is the reactjs server that runs the main quiz application.
 
 Installation as follows:
-* Ubuntu 18.04 ( likely other versions work, but that's what I used
-* Install a recent version of ReactJS ( I think I used this https://www.techomoro.com/how-to-install-and-setup-a-react-app-on-ubuntu-18-04-1/ )
-* Now, cd into deepfakequiz/react-tutorial
+* First, cd into deepfakequiz/react-tutorial
 * Install the project dependencies at the command line: >> npm install
-* Edit the src/global.js file and make the the local settings are uncommented (ie, googleAuth=false )
+* Edit the src/global.js file and make the the local settings are uncommented (ie, googleAuth=false, local URL for post server )
 * Run the server as follows at the command line: >> npm start
+* ReactJS will automatically open a browser tab for you
 
 ## production deployment
 
