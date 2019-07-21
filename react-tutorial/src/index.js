@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 //import * as serviceWorker from './serviceWorker';
+
 import Start from './Start';
 import Error from './Error';
 import { GoogleLogin } from 'react-google-login';
@@ -20,13 +21,15 @@ const responseGoogleFail = (response) => {
 //console.log("PROCESS AUTH=", process.env.REACT_APP_AUTH, process.env.PORT);
 
 // Chrome 1 - 71
-const isChrome = !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);
-
-if (!isChrome) {
-
-	ReactDOM.render(<Error error="Only the Google Chrome browser is supported." />, document.getElementById('root'));
-
-} else if (!global.googleauth) {
+//const isChrome = !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);
+//console.log("ISCHROME", isChrome , window.chrome );
+//if (!isChrome) {
+//
+//ReactDOM.render(<Error error="Only the Google Chrome browser is supported." />, document.getElementById('root'));
+//
+//} else 
+	
+if (!global.googleauth) {
 
 	ReactDOM.render(
 		<Start guid="999" />,
