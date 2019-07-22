@@ -44,7 +44,13 @@ if (!isChrome) {
 
 	ReactDOM.render(
 		<div className="Google">
-			<h1>Click To Login Using Your Google Account:</h1>
+			<h1>Deep Fake Quiz</h1>
+			<br />
+			<h2>Can you tell the difference between a real person speaking or a fake?</h2>
+			<br />
+			<h2>Deep machine learning has made it nearly impossible for you to tell the difference.  These "deep fakes" sound just like the real thing.</h2>
+			<br />
+			<h2>In this quiz, we will test your abilities to spot the fakes!  To get started, click to login with your google account:</h2>
 			<GoogleLogin
 			    clientId="199718064485-gm6lbrk6n4fmn991oe2osqihpu3rrbnc.apps.googleusercontent.com"
 			    buttonText="Login"

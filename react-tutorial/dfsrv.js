@@ -1,5 +1,7 @@
-var http = require('https');
+var http = require('http');
 var fs = require('fs');
+
+var nonce = "16yu43";
 
 var server = http.createServer (
 
@@ -11,11 +13,13 @@ var server = http.createServer (
 	},
 	*/
 
+	/*
 	{
 	  key: fs.readFileSync('/home/ubuntu/ssl/private-key.pem'),
 	  cert: fs.readFileSync('/home/ubuntu/ssl/252239439.crt'),
 	  ca: fs.readFileSync('/home/ubuntu//ssl/252239439.ca-bundle')
 	},
+	*/
 
     	function(request,response){
 
@@ -49,6 +53,12 @@ var server = http.createServer (
 
 			obj = JSON.parse(body);
 			console.log(obj);
+
+			if ( obj.nonce != nonce ) {
+				console.log("nonce check failed.");
+				response.end("invalid POST request.");
+				return;
+			}
 
 			dt = new Date().getTime()
 			fs.writeFileSync("./data/results_" + obj.id + "_" + dt, body,{encoding:'utf8',flag:'w'})

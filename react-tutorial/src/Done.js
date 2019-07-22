@@ -1,7 +1,13 @@
 import React from 'react';
 import './Done.css';
+import { GoogleLogout } from 'react-google-login';
 import axios from 'axios';
 import global from './global';
+
+const logout = () => {
+        console.log("logout success=");
+}
+
 
 export default class Done extends React.Component {
 
@@ -29,7 +35,8 @@ export default class Done extends React.Component {
 			gender: this.state.gender,
 			one_results: this.state.one_results,
 			results: this.state.results,
-			experiment: global.experiment
+			experiment: global.experiment,
+			nonce: global.nonce
 		})
 		.then(function (response) {
 			console.log("RESULTS SENT",response);
@@ -45,6 +52,13 @@ export default class Done extends React.Component {
 	      			<h1>Thanks for participating in the Deep Fake Quiz!</h1>
 				<br />
 	      			<h1>We will email your scores to you after the tournament ends.</h1>
+				<br />
+				<GoogleLogout
+				      buttonText="Logout"
+				      onLogoutSuccess={logout}
+				    >
+				</GoogleLogout>
+
 			</div>
 	    	);
 	  }
