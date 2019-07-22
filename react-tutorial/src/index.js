@@ -28,13 +28,14 @@ if (window.location.href.indexOf("wave")>0) {
 }
 
 // Chrome 1 - 71
-const isChrome = !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);
-console.log("ISCHROME", isChrome , window.chrome );
-if (!isChrome) {
-
-	ReactDOM.render(<Error error="Only the Google Chrome browser is supported." />, document.getElementById('root'));
-
-} else if (!global.googleauth) {
+//const isChrome = !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);
+//console.log("ISCHROME", isChrome , window.chrome );
+//if (!isChrome) {
+//
+/// ReactDOM.render(<Error error="Only the Google Chrome browser is supported." />, document.getElementById('root'));
+//
+//} else 
+if (!global.googleauth) {
 
 	ReactDOM.render(
 		<Start guid="999" />,

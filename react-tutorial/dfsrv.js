@@ -1,4 +1,4 @@
-var http = require('http');
+var http = require('https');
 var fs = require('fs');
 
 var nonce = "16yu43";
@@ -13,13 +13,11 @@ var server = http.createServer (
 	},
 	*/
 
-	/*
 	{
 	  key: fs.readFileSync('/home/ubuntu/ssl/private-key.pem'),
 	  cert: fs.readFileSync('/home/ubuntu/ssl/252239439.crt'),
 	  ca: fs.readFileSync('/home/ubuntu//ssl/252239439.ca-bundle')
 	},
-	*/
 
     	function(request,response){
 
