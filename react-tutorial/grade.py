@@ -145,6 +145,11 @@ for test in tests:
 
 print("ALL GRADES=", grades)
 
+f = open("grades.txt","w")
+for g in grades:
+	f.write( "%s,%d,%d,%d\n" % ( g[0],g[1][0],g[1][1],g[1][2] ) )
+	f.flush()
+f.close()
 
 
 

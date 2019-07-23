@@ -35,3 +35,4 @@ nohup.out
 experiments
 experiments/
 
+.ipynb_checkpoints/
