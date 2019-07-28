@@ -17,7 +17,7 @@ var passport = require("passport");
 const { deepfakequiz } = config;
 if (!deepfakequiz) throw new Error("configuration cannot be null/undefined");
 
-const PORT = deepfakequiz.port;
+const PORT = 443; //deepfakequiz.port;
 
 if (NodeService.isProduction()) {
   const express = require("express");
@@ -64,20 +64,18 @@ if (NodeService.isProduction()) {
   });
 
   //for server
-  
-  // https.createServer({
-	//   key: fs.readFileSync('/home/ubuntu/ssl/private-key.pem'),
-	//   cert: fs.readFileSync('/home/ubuntu/ssl/252239439.crt'),
-	//   ca: fs.readFileSync('/home/ubuntu//ssl/252239439.ca-bundle')
-	// }, app).listen(PORT, function() {
-  //   console.log(`Started Express server on port ${PORT}`);
-  // });
+  https.createServer({
+	   key: fs.readFileSync('/home/ubuntu/ssl/private-key.pem'),
+	   cert: fs.readFileSync('/home/ubuntu/ssl/252239439.crt'),
+	   ca: fs.readFileSync('/home/ubuntu//ssl/252239439.ca-bundle')
+	 }, app).listen(PORT, function() {
+     console.log(`Started Express server on port ${PORT}`);
+   });
 
   // for localhost 
-
-  app.listen(PORT, () => {
-    console.log(`Started Express server on port ${PORT}`);
-  });
+  //app.listen(PORT, () => {
+  //  console.log(`Started Express server on port ${PORT}`);
+  // });
 } else {
   const webpack = require("webpack");
   const WebpackDevServer = require("webpack-dev-server");

@@ -4,8 +4,9 @@ const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 var fs = require('fs');
 
-let Domain ="http://localhost:3000";
-// let Domain ="https://test.deepfakequiz.com:3000";
+//let Domain ="http://localhost:3000";
+//let Domain ="http://test.deepfakequiz.com:3000";
+let Domain ="https://test.deepfakequiz.com";
 
 const GoogleRedirectUri = `${Domain}/api/oauth/complete`
 var nonce = "16yu43";

@@ -36,3 +36,6 @@ experiments
 experiments/
 
 .ipynb_checkpoints/
+
+userData.json
+
