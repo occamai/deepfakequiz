@@ -155,8 +155,9 @@ function getParserRules () {
       // include: path.join(__dirname, 'public')
     },
     {
+      type: 'javascript/auto',
       test: /\.json$/,
-      loader: 'raw-loader',
+      loader: 'file-loader?name=[name].[ext]',
       // include: path.join(__dirname, 'public')
     }
   ];
