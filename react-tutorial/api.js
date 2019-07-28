@@ -116,7 +116,9 @@ router.get('/oauth/complete', (req, res, next) => {
           if (err) {
               console.log(err);
           } else {
+	      console.log("REDIR", redirectURL);
               return res.redirect(redirectURL+'start');
+              //return res.redirect("https://test.deepfakequiz.com/start");
           }
       });
       

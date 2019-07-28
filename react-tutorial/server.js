@@ -62,6 +62,26 @@ if (NodeService.isProduction()) {
     const dist = path.join(__dirname, "/dicts/index.html");
     res.sendFile(dist);
   });
+  
+  app.get("/wavenet", (req, res) => {
+    const dist = path.join(__dirname, "/dicts/index.html");
+    res.sendFile(dist);
+  });
+  
+  app.get("/wavenetstart", (req, res) => {
+    const dist = path.join(__dirname, "/dicts/index.html");
+    res.sendFile(dist);
+  });
+  
+  app.get("/wavenet2", (req, res) => {
+    const dist = path.join(__dirname, "/dicts/index.html");
+    res.sendFile(dist);
+  });
+  
+  app.get("/wavenet2start", (req, res) => {
+    const dist = path.join(__dirname, "/dicts/index.html");
+    res.sendFile(dist);
+  });
 
   //for server
   https.createServer({
