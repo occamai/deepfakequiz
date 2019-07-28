@@ -145,6 +145,12 @@ for test in tests:
 
 print("ALL GRADES=", grades)
 
+score = [ g[1][2]/20.0 for g in grades ]
+print("SCORES=", score)
+import statistics
+print("STATS", min(score),max(score),statistics.median(score))
+
+
 f = open("grades.txt","w")
 for g in grades:
 	f.write( "%s,%d,%d,%d\n" % ( g[0],g[1][0],g[1][1],g[1][2] ) )

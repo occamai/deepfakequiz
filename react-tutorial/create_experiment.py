@@ -72,7 +72,8 @@ for line in lines:
 		true_forms.append( [ "r", path, parts[0], parts[3] ] )
 
 # tacotron files
-tacodir = "../../tacotron2-asv-spoof/flac"
+#tacodir = "../../tacotron2-asv-spoof/flac"
+tacodir = "../../dc-tts-asv-spoof/flac"
 tacos = os.listdir(tacodir)
 for taco in tacos:
 	path = os.path.join(tacodir, taco )

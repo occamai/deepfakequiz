@@ -19,7 +19,10 @@ const responseGoogleFail = (response) => {
 }
 
 // Choose which experiment
-if (window.location.href.indexOf("wave")>0) {
+if (window.location.href.indexOf("wavenet2")>0) {
+	console.log("CHOOSING AVS+WAVENET EXP 2");
+	global.experiment = global.avs_wavenet2;
+} else if (window.location.href.indexOf("wavenet")>0) {
 	console.log("CHOOSING AVS+WAVENET EXP");
 	global.experiment = global.avs_wavenet;
 } else {
